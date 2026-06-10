@@ -5,6 +5,8 @@ import DemoGrid from "../Components/HomeComponents/DemoGrid";
 import GsapSection from "../Components/HomeComponents/GSAPSection";
 import TemplateLibrary from "../Components/HomeComponents/TemplateLibrary";
 import Slider2 from "../Components/HomeComponents/Slider2";
+import PremiumElements from "../Components/HomeComponents/PremiumElements";
+import FeatureSection from "../Components/HomeComponents/FeatureSection";
 
 function Home() {
   return (
@@ -15,6 +17,8 @@ function Home() {
       <GsapSection />
       <TemplateLibrary />
       <Slider2 />
+      <PremiumElements />
+      <FeatureSection />
     </>
   );
 }

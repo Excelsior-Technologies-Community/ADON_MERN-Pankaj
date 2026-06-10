@@ -11,8 +11,8 @@ const DemoSection = () => {
       gsap.from(".word", {
         opacity: 0,
         x: -100,
-        duration: 1,
-        stagger: 0.2,
+        duration: 2,
+        stagger: 0.5,
         scrollTrigger: {
           trigger: titleRef.current,
           start: "top 80%",

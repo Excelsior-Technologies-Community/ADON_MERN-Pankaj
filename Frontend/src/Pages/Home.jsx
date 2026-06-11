@@ -7,6 +7,9 @@ import TemplateLibrary from "../Components/HomeComponents/TemplateLibrary";
 import Slider2 from "../Components/HomeComponents/Slider2";
 import PremiumElements from "../Components/HomeComponents/PremiumElements";
 import FeatureSection from "../Components/HomeComponents/FeatureSection";
+import SupportSection from "../Components/HomeComponents/supportSection";
+import FAQ from "../Components/HomeComponents/FAQ";
+import FeatureBadges from "../Components/HomeComponents/FeatureBadges";
 
 function Home() {
   return (
@@ -19,6 +22,9 @@ function Home() {
       <Slider2 />
       <PremiumElements />
       <FeatureSection />
+      <SupportSection />
+      <FAQ />
+      <FeatureBadges />
     </>
   );
 }

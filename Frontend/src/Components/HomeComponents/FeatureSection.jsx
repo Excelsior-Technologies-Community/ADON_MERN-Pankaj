@@ -33,12 +33,12 @@ function FeatureSection() {
                 <img
                   src={nav}
                   alt=""
-                  className="w-full h-[36px] sm:h-[44px] object-contain object-left rounded-xl flex-shrink-0"
+                  className="w-full h-[36px] sm:h-[44px] object-cover object-left rounded-xl flex-shrink-0"
                 />
                 <img
                   src={body}
                   alt=""
-                  className="w-full flex-1 object-contain object-left rounded-xl min-h-0"
+                  className="w-full flex-1 object-cover object-left rounded-xl min-h-0"
                 />
               </div>
               <div className="w-[120px] sm:w-[145px] md:w-[160px] flex-shrink-0">

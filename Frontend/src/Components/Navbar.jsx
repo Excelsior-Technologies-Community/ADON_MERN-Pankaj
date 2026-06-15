@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineDown } from "react-icons/ai";
 import { BsBasket3 } from "react-icons/bs";
 import logo from "../assets/images/logo.png";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [mobilePages, setMobilePages] = useState(false);
@@ -23,7 +24,7 @@ const Navbar = () => {
             </li>
 
             <li className="cursor-pointer text-white hover:text-[#ff6b3d] transition-colors duration-300">
-              Portfolio
+              <Link to="/portfolio"> Portfolio</Link>
             </li>
 
             {/* Pages Dropdown */}
@@ -104,7 +105,7 @@ const Navbar = () => {
           </li>
 
           <li className="py-4 border-b hover:text-[#ff6b3d] transition-colors cursor-pointer">
-            Portfolio
+            <Link to="/portfolio"> Portfolio</Link>
           </li>
 
           {/* Mobile Pages */}

@@ -20,7 +20,7 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <ul className="hidden lg:flex items-center gap-12 font-medium">
             <li className="cursor-pointer text-white hover:text-[#ff6b3d] transition-colors duration-300">
-              Home
+              <Link to="/">Home </Link>
             </li>
 
             <li className="cursor-pointer text-white hover:text-[#ff6b3d] transition-colors duration-300">
@@ -101,7 +101,7 @@ const Navbar = () => {
         {/* Mobile Links */}
         <ul className="p-5 text-black">
           <li className="py-4 border-b hover:text-[#ff6b3d] transition-colors cursor-pointer">
-            Home
+            <Link to="/">Home </Link>
           </li>
 
           <li className="py-4 border-b hover:text-[#ff6b3d] transition-colors cursor-pointer">

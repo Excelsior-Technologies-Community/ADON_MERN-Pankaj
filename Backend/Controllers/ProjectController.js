@@ -66,10 +66,9 @@ export const getProjectsBySlug = async (req, res) => {
 };
 
 
+
 export const createProject = async (req, res) => {
-
     try {
-
 
         const {
             slug,
@@ -81,64 +80,127 @@ export const createProject = async (req, res) => {
             description,
             challenge,
             solution,
-            heroImage,
             traffic,
             conversions,
-            engagement, services, gallery
+            engagement,
+            services
         } = req.body;
 
-        const query = ` INSERT INTO projects(slug,
-        title,
-        category,
-        client,
-        year,
-        duration,
-        description,
-        challenge,
-        solution,
-        heroImage,
-        traffic,
-        conversions,
-        engagement) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+        // Cloudinary URLs
 
-        const [result] = await db.promise().query(query, [slug,
-            title,
-            category,
-            client,
-            year,
-            duration,
-            description,
-            challenge,
-            solution,
-            heroImage,
-            traffic,
-            conversions,
-            engagement],)
+        const heroImage =
+            req.files?.heroImage?.[0]?.path || null;
+
+        const galleryImages =
+            req.files?.gallery?.map(
+                (file) => file.path
+            ) || [];
+
+        // Create Project
+
+        const [result] =
+            await db.promise().query(
+                `
+        INSERT INTO projects(
+          slug,
+          title,
+          category,
+          client,
+          year,
+          duration,
+          description,
+          challenge,
+          solution,
+          heroImage,
+          traffic,
+          conversions,
+          engagement
+        )
+        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)
+        `,
+                [
+                    slug,
+                    title,
+                    category,
+                    client,
+                    year,
+                    duration,
+                    description,
+                    challenge,
+                    solution,
+                    heroImage,
+                    traffic,
+                    conversions,
+                    engagement,
+                ]
+            );
 
         const projectId = result.insertId;
 
-        if (services?.length > 0) {
-            const serviceValues = services.map((service) => [projectId, service])
+        // Services
 
-            await db.promise().query(`INSERT INTO services (project_id ,service_name) VALUES ?`, [serviceValues])
+        if (services) {
+
+            const serviceArray =
+                services
+                    .split(",")
+                    .map((item) => item.trim());
+
+            const serviceValues =
+                serviceArray.map(
+                    (service) => [
+                        projectId,
+                        service
+                    ]
+                );
+
+            await db.promise().query(
+                `
+        INSERT INTO services
+        (project_id, service_name)
+        VALUES ?
+        `,
+                [serviceValues]
+            );
         }
 
-        if (gallery?.length > 0) {
-            const galleryValues = gallery.map((image) => [projectId, image])
+        // Gallery
 
-            await db.promise().query(`INSERT INTO gallery (project_id ,image_url) VALUES ?`, [galleryValues])
+        if (galleryImages.length > 0) {
+
+            const galleryValues =
+                galleryImages.map(
+                    (image) => [
+                        projectId,
+                        image
+                    ]
+                );
+
+            await db.promise().query(
+                `
+        INSERT INTO gallery
+        (project_id, image_url)
+        VALUES ?
+        `,
+                [galleryValues]
+            );
         }
 
         res.status(201).json({
             success: true,
-            message: "Product Created",
+            message: "Project Created Successfully",
             projectId,
-        })
+        });
+
     } catch (error) {
+
+        console.log(error);
+
         res.status(500).json({
             success: false,
             message: error.message,
         });
+
     }
 };
 

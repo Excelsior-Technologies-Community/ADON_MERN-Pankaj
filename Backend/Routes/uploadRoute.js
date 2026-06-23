@@ -6,22 +6,14 @@ router.post(
     "/test-upload",
     upload.single("image"),
     (req, res) => {
-        try {
-            console.log("FILE =>", req.file);
 
-            return res.json({
-                success: true,
-                file: req.file,
-            });
+        console.log(req.file);
 
-        } catch (error) {
-            console.log("ROUTE ERROR =>", error);
+        res.json({
+            success: true,
+            file: req.file,
+        });
 
-            return res.status(500).json({
-                success: false,
-                message: error.message,
-            });
-        }
     }
 );
 export default router;

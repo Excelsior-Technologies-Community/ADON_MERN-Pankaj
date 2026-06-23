@@ -9,7 +9,12 @@ import cloudinary from "../Config/cloudinary.js"
 const storage = new CloudinaryStorage({
     cloudinary,
     params: {
-        folder: "adon-projects",
+        folder: "adon-projects", allowed_formats: [
+            "jpg",
+            "jpeg",
+            "png",
+            "webp",
+        ],
     },
 });
 

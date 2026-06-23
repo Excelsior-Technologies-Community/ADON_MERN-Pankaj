@@ -11,29 +11,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(express.urlencoded({
+    extended: true
+}));
+
 app.use("/api/projects", ProjectRouter)
 app.use("/api/user", UserRouter)
 
 app.use("/api", uploadRouter)
 app.use((err, req, res, next) => {
-    console.log("ERROR =>", err);
-
-    res.status(500).json({
-        success: false,
+    console.error(err);
+    res.status(err.status || 500).json({
         message: err.message,
+        stack: err.stack
     });
 });
-console.log(
-    process.env.CLOUDINARY_CLOUD_NAME
-);
-
-console.log(
-    process.env.CLOUDINARY_API_KEY
-);
-
-console.log(
-    process.env.CLOUDINARY_API_SECRET
-);
 
 app.get("/", (req, res) => {
     res.json({

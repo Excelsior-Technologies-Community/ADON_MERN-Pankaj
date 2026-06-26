@@ -27,7 +27,7 @@ function App() {
 
           <Route path="projects/add" element={<AddProject />} />
 
-          <Route path="projects/edit/:id"  element={<EditProject />} />
+          <Route path="projects/edit/:id" element={<EditProject />} />
         </Route>
       </Routes>
     </>

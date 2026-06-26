@@ -347,3 +347,102 @@ export const updateProject = async (req, res) => {
         });
     }
 };
+
+
+export const importProjects = async (req, res) => {
+    try {
+        const { projects } = req.body;
+
+        if (!projects || projects.length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: "No Projects Found",
+            });
+        }
+
+        for (const project of projects) {
+            // Insert Project
+            const [result] = await db.promise().query(
+                `INSERT INTO projects
+        (
+          slug,
+          title,
+          category,
+          client,
+          year,
+          duration,
+          description,
+          challenge,
+          solution,
+          heroImage,
+          traffic,
+          conversions,
+          engagement
+        )
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+                [
+                    project.slug,
+                    project.title,
+                    project.category,
+                    project.client,
+                    project.year,
+                    project.duration,
+                    project.description,
+                    project.challenge,
+                    project.solution,
+                    project.heroImage,
+                    project.results.traffic,
+                    project.results.conversions,
+                    project.results.engagement,
+                ]
+            );
+
+            const projectId = result.insertId;
+
+            // Insert Services
+            if (project.services?.length > 0) {
+                const serviceValues = project.services.map((service) => [
+                    projectId,
+                    service,
+                ]);
+
+                await db.promise().query(
+                    `INSERT INTO services
+          (project_id, service_name)
+          VALUES ?`,
+                    [serviceValues]
+                );
+            }
+
+            // Insert Gallery
+            if (project.gallery?.length > 0) {
+                const galleryValues = project.gallery.map((image) => [
+                    projectId,
+                    image,
+                ]);
+
+                await db.promise().query(
+                    `INSERT INTO gallery
+          (project_id, image_url)
+          VALUES ?`,
+                    [galleryValues]
+                );
+            }
+        }
+
+        res.status(201).json({
+            success: true,
+            message: `${projects.length} Projects Imported Successfully`,
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+
+    }
+};

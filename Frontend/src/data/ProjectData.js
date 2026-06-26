@@ -260,3 +260,295 @@ const projects = [
 
 
 export default projects;
+
+
+
+// const projects = [
+//     {
+//         slug: "digital-agency",
+//         title: "Digital Agency",
+//         category: "Branding",
+//         client: "Studio X",
+//         year: "2026",
+//         duration: "3 Months",
+//         services: ["UI/UX Design", "Brand Identity", "Web Development"],
+//         description:
+//             "A modern digital agency website focused on delivering a premium user experience and strong brand identity. The project was designed to showcase services, improve lead generation and create a professional online presence.",
+//         challenge:
+//             "The client needed a complete redesign of their outdated website which suffered from poor navigation, inconsistent branding and low conversion rates.",
+//         solution:
+//             "We created a modern design system, improved navigation, optimized mobile layouts and implemented engaging interactions across the website.",
+//         results: {
+//             traffic: "150%",
+//             conversions: "90%",
+//             engagement: "200%",
+//         },
+//         heroImage:
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/xd9kzdbrchq0ukufzbsw.jpg",
+//         gallery: [
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/p40ol19hkb9n9fowkhgc.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/j7zjjbjtnaj3ortrsb03.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/g2xt9jj9zwjvddmndxgr.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/yglsym16qxrtcfgvp1on.jpg",
+//         ],
+//     },
+
+//     {
+//         slug: "creative-studio",
+//         title: "Creative Studio",
+//         category: "UI/UX",
+//         client: "Creative Lab",
+//         year: "2025",
+//         duration: "2 Months",
+//         services: ["Web Design", "UI Design", "Animation"],
+//         description:
+//             "A portfolio website for a creative studio showcasing projects, services and team expertise with a visually engaging experience.",
+//         challenge:
+//             "The existing website lacked visual appeal and failed to communicate the studio's creative capabilities effectively.",
+//         solution:
+//             "We designed a highly interactive experience using modern layouts, animations and strong visual storytelling.",
+//         results: {
+//             traffic: "120%",
+//             conversions: "75%",
+//             engagement: "180%",
+//         },
+//         heroImage:
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/p40ol19hkb9n9fowkhgc.jpg",
+//         gallery: [
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/j7zjjbjtnaj3ortrsb03.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/g2xt9jj9zwjvddmndxgr.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/yglsym16qxrtcfgvp1on.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/szrri2sq1tgeuvqqzlny.jpg",
+//         ],
+//     },
+
+//     {
+//         slug: "startup-landing",
+//         title: "Startup Landing",
+//         category: "Development",
+//         client: "Nova Tech",
+//         year: "2026",
+//         duration: "1 Month",
+//         services: ["Development", "UI/UX"],
+//         description:
+//             "A high-converting startup landing page designed to attract investors and generate early customer signups.",
+//         challenge:
+//             "The startup required a modern landing page that clearly communicated their value proposition.",
+//         solution:
+//             "We built a fast, responsive landing page with strong messaging and optimized call-to-actions.",
+//         results: {
+//             traffic: "100%",
+//             conversions: "110%",
+//             engagement: "140%",
+//         },
+//         heroImage:
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/j7zjjbjtnaj3ortrsb03.jpg",
+//         gallery: [
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/g2xt9jj9zwjvddmndxgr.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/yglsym16qxrtcfgvp1on.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/szrri2sq1tgeuvqqzlny.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/newcyeocnjaq3orh7gl8.jpg",
+//         ],
+//     },
+
+//     {
+//         slug: "marketing-agency",
+//         title: "Marketing Agency",
+//         category: "Marketing",
+//         client: "Growth Media",
+//         year: "2024",
+//         duration: "4 Months",
+//         services: ["Branding", "Marketing", "Development"],
+//         description:
+//             "A marketing agency website designed to generate leads and establish credibility in a competitive market.",
+//         challenge:
+//             "The agency struggled with low engagement and poor user retention.",
+//         solution:
+//             "We redesigned the website structure, improved content hierarchy and introduced conversion-focused sections.",
+//         results: {
+//             traffic: "170%",
+//             conversions: "95%",
+//             engagement: "230%",
+//         },
+//         heroImage:
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/g2xt9jj9zwjvddmndxgr.jpg",
+//         gallery: [
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/yglsym16qxrtcfgvp1on.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/szrri2sq1tgeuvqqzlny.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/newcyeocnjaq3orh7gl8.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/jbo0esj5hor6pzef0rym.jpg",
+//         ],
+//     }, {
+//         slug: "business-website",
+//         title: "Business Website",
+//         category: "Development",
+//         client: "Business Hub",
+//         year: "2025",
+//         duration: "2 Months",
+//         services: ["Development", "SEO"],
+//         description:
+//             "A professional corporate website focused on business growth, credibility and customer acquisition.",
+//         challenge:
+//             "The client required a scalable and future-proof website with a professional appearance.",
+//         solution:
+//             "We developed a modern business website with optimized performance and clean architecture.",
+//         results: {
+//             traffic: "130%",
+//             conversions: "80%",
+//             engagement: "170%",
+//         },
+//         heroImage:
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/yglsym16qxrtcfgvp1on.jpg",
+//         gallery: [
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/szrri2sq1tgeuvqqzlny.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/newcyeocnjaq3orh7gl8.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/jbo0esj5hor6pzef0rym.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/ouowsbzmnigumityfjyt.jpg",
+//         ],
+//     },
+
+//     {
+//         slug: "portfolio-showcase",
+//         title: "Portfolio Showcase",
+//         category: "UI/UX",
+//         client: "John Carter",
+//         year: "2026",
+//         duration: "1.5 Months",
+//         services: ["UI Design", "Branding"],
+//         description:
+//             "A personal portfolio website designed to highlight skills, achievements and featured projects.",
+//         challenge:
+//             "The client wanted a portfolio that stood out in a highly competitive design industry.",
+//         solution:
+//             "We focused on typography, project storytelling and elegant visual presentation.",
+//         results: {
+//             traffic: "90%",
+//             conversions: "65%",
+//             engagement: "150%",
+//         },
+//         heroImage:
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/szrri2sq1tgeuvqqzlny.jpg",
+//         gallery: [
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/newcyeocnjaq3orh7gl8.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/jbo0esj5hor6pzef0rym.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/ouowsbzmnigumityfjyt.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/bpcbaifker0lvi05wpsz.jpg",
+//         ],
+//     },
+
+//     {
+//         slug: "fashion-brand",
+//         title: "Fashion Brand",
+//         category: "Branding",
+//         client: "Elite Fashion",
+//         year: "2024",
+//         duration: "3 Months",
+//         services: ["Brand Identity", "Web Design"],
+//         description:
+//             "A premium fashion brand website designed to showcase products and enhance brand perception.",
+//         challenge:
+//             "The brand lacked a strong digital identity and online customer engagement.",
+//         solution:
+//             "We developed a luxurious visual identity and an immersive shopping experience.",
+//         results: {
+//             traffic: "160%",
+//             conversions: "85%",
+//             engagement: "210%",
+//         },
+//         heroImage:
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/ouowsbzmnigumityfjyt.jpg",
+//         gallery: [
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/bpcbaifker0lvi05wpsz.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/dc3bq1awptqs6ulgr0qs.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/jywen5oat43qjawt4dlg.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462939/adon-projects/bxgbdumdzr6z2gfhfrl7.jpg",
+//         ],
+//     }, {
+//         slug: "ecommerce-store",
+//         title: "E-Commerce Store",
+//         category: "Development",
+//         client: "Shoply",
+//         year: "2025",
+//         duration: "5 Months",
+//         services: ["E-Commerce", "Development", "SEO"],
+//         description:
+//             "A scalable e-commerce platform built to provide seamless shopping experiences across devices.",
+//         challenge:
+//             "The store required better performance, checkout flow and mobile responsiveness.",
+//         solution:
+//             "We optimized the shopping journey and improved performance across the entire platform.",
+//         results: {
+//             traffic: "220%",
+//             conversions: "120%",
+//             engagement: "250%",
+//         },
+//         heroImage:
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/bpcbaifker0lvi05wpsz.jpg",
+//         gallery: [
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462937/adon-projects/dc3bq1awptqs6ulgr0qs.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/jywen5oat43qjawt4dlg.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462939/adon-projects/bxgbdumdzr6z2gfhfrl7.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/jnuikjkx0offaflgvrk0.jpg",
+//         ],
+//     },
+
+//     {
+//         slug: "saas-platform",
+//         title: "SaaS Platform",
+//         category: "UI/UX",
+//         client: "CloudSync",
+//         year: "2026",
+//         duration: "4 Months",
+//         services: ["Dashboard Design", "UI/UX"],
+//         description:
+//             "A modern SaaS dashboard focused on usability, productivity and data visualization.",
+//         challenge:
+//             "Users struggled with navigation and understanding complex workflows.",
+//         solution:
+//             "We redesigned the platform with a clean interface and intuitive user experience.",
+//         results: {
+//             traffic: "140%",
+//             conversions: "100%",
+//             engagement: "190%",
+//         },
+//         heroImage:
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462939/adon-projects/bxgbdumdzr6z2gfhfrl7.jpg",
+//         gallery: [
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/jnuikjkx0offaflgvrk0.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/ywjdzsdfel4ri0i3xb5f.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/ieuqzd8wyn9krbifyyx4.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/jxgzyaa0pmmp0xgwqj3j.jpg",
+//         ],
+//     },
+
+//     {
+//         slug: "real-estate",
+//         title: "Real Estate",
+//         category: "Marketing",
+//         client: "Prime Estate",
+//         year: "2025",
+//         duration: "3 Months",
+//         services: ["Branding", "Web Design", "Marketing"],
+//         description:
+//             "A real estate website designed to showcase premium properties and generate qualified leads.",
+//         challenge:
+//             "The client needed a visually appealing platform that could attract buyers and investors.",
+//         solution:
+//             "We created a property-focused experience with advanced listings and lead capture features.",
+//         results: {
+//             traffic: "180%",
+//             conversions: "95%",
+//             engagement: "220%",
+//         },
+//         heroImage:
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/jnuikjkx0offaflgvrk0.jpg",
+//         gallery: [
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/ywjdzsdfel4ri0i3xb5f.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/ieuqzd8wyn9krbifyyx4.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462938/adon-projects/jxgzyaa0pmmp0xgwqj3j.jpg",
+//             "https://res.cloudinary.com/dfacgtakf/image/upload/v1782462939/adon-projects/amvloexxuswak3xdp1mm.jpg",
+//         ],
+//     },
+// ];
+
+// export default projects;

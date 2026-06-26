@@ -6,6 +6,7 @@ import db from "./Config/db.js";
 import ProjectRouter from "./Routes/ProjectRoute.js";
 import UserRouter from "./Routes/AuthRoute.js";
 import uploadRouter from "./Routes/uploadRoute.js"
+import uploadImg from "./Routes/UploadAllRoute.js"
 const app = express();
 
 app.use(cors());
@@ -17,6 +18,7 @@ app.use(express.urlencoded({
 
 app.use("/api/projects", ProjectRouter)
 app.use("/api/user", UserRouter)
+app.use("/api/upload", uploadImg)
 
 app.use("/api", uploadRouter)
 app.use((err, req, res, next) => {

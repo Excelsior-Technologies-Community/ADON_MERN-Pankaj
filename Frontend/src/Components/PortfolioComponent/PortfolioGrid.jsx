@@ -1,15 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import portfolioData from "../../data/ProjectData.js";
-import p1 from "../../assets/images/p1.jpg";
-import p2 from "../../assets/images/p2.jpg";
-import p3 from "../../assets/images/p3.jpg";
-import p4 from "../../assets/images/p4.jpg";
-import p5 from "../../assets/images/p5.jpg";
-import p6 from "../../assets/images/p6.jpg";
+
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import axios from "axios";
 function PortfolioGrid() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [portfolioData, setPortfolioData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getProjects();
+  }, []);
+
+  const getProjects = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get("http://localhost:5000/api/projects");
+
+      setPortfolioData(data.data);
+    } catch (error) {
+      console.log(error);
+
+      toast.error(error.response?.data?.message || "Failed to load projects");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // const portfolioData = [
   //   {
@@ -55,7 +73,13 @@ function PortfolioGrid() {
     activeCategory === "All"
       ? portfolioData
       : portfolioData.filter((item) => item.category === activeCategory);
-
+  if (loading) {
+    return (
+      <section className="py-40 text-center">
+        <h2 className="text-2xl font-semibold">Loading Projects...</h2>
+      </section>
+    );
+  }
   return (
     <section className="bg-[#f5f5f5] py-24">
       <div className="max-w-7xl mx-auto px-5">

@@ -1,12 +1,48 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import projects from "../data/ProjectData";
+
 import { FaArrowRight } from "react-icons/fa";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 function ProjectDetails() {
   const { slug } = useParams();
+  const [project, setProjects] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const project = projects.find((item) => item.slug === slug);
+  useEffect(() => {
+    getProject();
+  }, [slug]);
+
+  const getProject = async () => {
+    try {
+      setLoading(true);
+
+      const { data } = await axios.get(
+        `http://localhost:5000/api/projects/${slug}`,
+      );
+      setProjects({
+        ...data.project,
+
+        services: data.services.map((item) => item.service_name),
+
+        gallery: data.gallery.map((item) => item.image_url),
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || "Project not Found");
+    } finally {
+      setLoading(false);
+    }
+  };
+  if (loading) {
+    return (
+      <section className="py-40 text-center">
+        <h2 className="text-3xl font-semibold">Loading...</h2>
+      </section>
+    );
+  }
 
   if (!project) {
     return (
@@ -116,25 +152,19 @@ function ProjectDetails() {
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white rounded-[25px] p-8 text-center">
-              <h3 className="text-5xl font-medium">
-                {project.results.traffic}
-              </h3>
+              <h3 className="text-5xl font-medium">{project.traffic}</h3>
 
               <p className="text-gray-500 mt-4">Traffic Growth</p>
             </div>
 
             <div className="bg-white rounded-[25px] p-8 text-center">
-              <h3 className="text-5xl font-medium">
-                {project.results.conversions}
-              </h3>
+              <h3 className="text-5xl font-medium">{project.conversions}</h3>
 
               <p className="text-gray-500 mt-4">Conversions</p>
             </div>
 
             <div className="bg-white rounded-[25px] p-8 text-center">
-              <h3 className="text-5xl font-medium">
-                {project.results.engagement}
-              </h3>
+              <h3 className="text-5xl font-medium">{project.engagement}</h3>
 
               <p className="text-gray-500 mt-4">Engagement</p>
             </div>

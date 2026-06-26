@@ -2,11 +2,19 @@ import React, { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineDown } from "react-icons/ai";
 import { BsBasket3 } from "react-icons/bs";
 import logo from "../assets/images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [mobilePages, setMobilePages] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
 
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.clear();
+    setOpenMenu(false);
+    navigate("/");
+  };
   return (
     <>
       {/* Navbar */}
@@ -66,6 +74,118 @@ const Navbar = () => {
                 Buy Now
               </span>
             </button>
+          </div>
+          <div className="flex items-center gap-4">
+            {!user ? (
+              <Link
+                to="/auth"
+                className="
+      hidden lg:block
+      px-6
+      py-3
+      rounded-full
+      bg-gradient-to-r
+      from-orange-500
+      to-[#ff6b3d]
+      text-white
+      font-medium
+      hover:scale-105
+      transition
+      "
+              >
+                Login / Signup
+              </Link>
+            ) : (
+              <>
+                <div className="relative hidden lg:block">
+                  <button
+                    onClick={() => setProfileOpen(!profileOpen)}
+                    className="flex items-center gap-3"
+                  >
+                    <div
+                      className="
+            w-10
+            h-10
+            rounded-full
+            bg-gradient-to-r
+            from-orange-500
+            to-amber-500
+            flex
+            items-center
+            justify-center
+            text-white
+            font-bold
+            "
+                    >
+                      {user?.name?.charAt(0)?.toUpperCase()}
+                    </div>
+
+                    <div className="text-left">
+                      <p className="text-sm font-medium">{user?.name}</p>
+
+                      <p className="text-xs text-gray-400">{user?.role}</p>
+                    </div>
+
+                    <AiOutlineDown
+                      className={`transition ${
+                        profileOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {profileOpen && (
+                    <div
+                      className="
+            absolute
+            right-0
+            top-14
+            w-60
+            bg-zinc-900
+            border
+            border-zinc-800
+            rounded-xl
+            overflow-hidden
+            shadow-2xl
+            "
+                    >
+                      <div className="p-4 border-b border-zinc-800">
+                        <p className="font-medium">{user.name}</p>
+
+                        <p className="text-sm text-gray-400">{user.email}</p>
+                      </div>
+
+                      {user.role === "admin" && (
+                        <Link
+                          to="/admin"
+                          className="
+                block
+                px-4
+                py-3
+                hover:bg-zinc-800
+                "
+                        >
+                          Admin Panel
+                        </Link>
+                      )}
+
+                      <button
+                        onClick={handleLogout}
+                        className="
+              w-full
+              text-left
+              px-4
+              py-3
+              text-red-400
+              hover:bg-zinc-800
+              "
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Icon */}
@@ -147,9 +267,90 @@ const Navbar = () => {
 
         {/* Mobile Button */}
         <div className="p-5">
-          <button className="w-full bg-black text-white py-4 rounded-full">
-            Buy Now
-          </button>
+          {user ? (
+            <div className="p-5 border-t">
+              <div className="flex items-center gap-3 mb-5">
+                <div
+                  className="
+        w-12
+        h-12
+        rounded-full
+        bg-gradient-to-r
+        from-orange-500
+        to-amber-500
+        flex
+        items-center
+        justify-center
+        text-white
+        font-bold
+        "
+                >
+                  {user?.name?.charAt(0)?.toUpperCase()}
+                </div>
+
+                <div>
+                  <p className="font-medium">{user.name}</p>
+
+                  <p className="text-sm text-gray-500">{user.role}</p>
+                </div>
+              </div>
+
+              {user.role === "admin" && (
+                <Link
+                  to="/admin"
+                  onClick={() => setOpenMenu(false)}
+                  className="
+        block
+        text-center
+        bg-gradient-to-r
+        from-amber-500
+        to-orange-500
+        text-black
+        py-3
+        rounded-xl
+        font-medium
+        mb-3
+        "
+                >
+                  Admin Panel
+                </Link>
+              )}
+
+              <button
+                onClick={handleLogout}
+                className="
+      w-full
+      border
+      border-red-500
+      text-red-500
+      py-3
+      rounded-xl
+      "
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="p-5">
+              <Link
+                to="/auth"
+                onClick={() => setOpenMenu(false)}
+                className="
+      block
+      text-center
+      bg-gradient-to-r
+      from-orange-500
+      to-[#ff6b3d]
+      text-white
+      py-3
+      rounded-xl
+      font-medium
+      "
+              >
+                Login / Signup
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </>

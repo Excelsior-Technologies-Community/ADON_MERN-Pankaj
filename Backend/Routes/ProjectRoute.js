@@ -24,6 +24,8 @@ ProjectRouter.post(
 );
 ProjectRouter.get("/:slug", getProjectsBySlug)
 ProjectRouter.delete("/:id", protect, deleteProject)
-ProjectRouter.put("/:id", protect, updateProject)
+ProjectRouter.put("/:id", protect, adminOnly, upload.fields([
+    { name: "heroImage", maxCount: 1 }, { name: "gallery", maxCount: 10 },
+]), updateProject)
 
 export default ProjectRouter;

@@ -208,7 +208,20 @@ export const deleteProject = async (req, res) => {
     try {
         const { id } = req.params;
 
-        await db.promise().query(`DELETE FROM projects WHERE id=? `, [id]);
+        const [project] = await db.promise().query("SELECT * FROM projects WHERE id = ?", [id]);
+
+        if (!project.length) {
+            return res.status(404).json({
+                success: false,
+                message: "project not found "
+            })
+        }
+
+
+
+        await db.promise().query(`DELETE FROM services WHERE id=? `, [id]);
+        await db.promise().query("DELETE FROM gallery WHERE id = ?  ", [id]);
+        await db.promise().query("DELETE FROM projects WHERE id = ? ", [id])
 
         res.status(200).json({
             success: true,
@@ -227,9 +240,39 @@ export const updateProject = async (req, res) => {
 
     try {
         const { id } = req.params;
-        const { services, gallery, ...project } = req.body;
 
-        const query = `UPDATE projects SET 
+        // Existing project
+        const [projectData] = await db.promise().query("SELECT * FROM projects WHERE id = ?", [id]);
+
+        if (!projectData.length) {
+            return res.status(404).json({
+                success: false,
+                message: "Project not found "
+            })
+        }
+
+        const oldProject = projectData[0];
+
+        const {
+            slug,
+            title,
+            category,
+            client,
+            year,
+            duration,
+            description,
+            challenge,
+            solution,
+            traffic,
+            conversions,
+            engagement,
+            services,
+        } = req.body;
+
+        const heroImage = req.files?.heroImage?.[0]?.path || oldProject.heroImage
+
+
+        await db.promise().query(`UPDATE projects SET 
           slug= ? ,
           title= ?,
           category=?,
@@ -243,81 +286,59 @@ export const updateProject = async (req, res) => {
           traffic=?,
           conversions=?,
           engagement=?
-          WHERE id =? `
-
-        const values = [
-            project.slug,
-            project.title,
-            project.category,
-            project.client,
-            project.year,
-            project.duration,
-            project.description,
-            project.challenge,
-            project.solution,
-            project.heroImage,
-            project.traffic,
-            project.conversions,
-            project.engagement,
+          WHERE id =? ` , [
+            slug || oldProject.slug,
+            title || oldProject.title,
+            category || oldProject.category,
+            client || oldProject.client,
+            year || oldProject.year,
+            duration || oldProject.duration,
+            description || oldProject.description,
+            challenge || oldProject.challenge,
+            solution || oldProject.solution,
+            heroImage,
+            traffic || oldProject.traffic,
+            conversions || oldProject.conversions,
+            engagement || oldProject.engagement,
             id,
+        ]);
 
-        ]
 
-        await db.promise().query(query, values);
 
         // Update Services
-
-        await db.promise().query(
-            "DELETE FROM services WHERE project_id = ?",
-            [id]
-        );
-
-        if (services?.length > 0) {
-            const serviceValues = services.map(
-                (service) => [
-                    id,
-                    service,
-                ]
-            );
-
+        if (services) {
             await db.promise().query(
-                `
-        INSERT INTO services
-        (project_id, service_name)
-        VALUES ?
-        `,
-                [serviceValues]
+                "DELETE FROM services WHERE project_id = ?",
+                [id]
             );
+            const serviceArray = services.split(",").map(item => item.trim());
+
+            const serviceValues = serviceArray.map(service => [id, service])
+
+            if (serviceValues.length > 0) {
+                await db.promise().query(
+                    `INSERT INTO services ( project_id , service_name) VALUES ? `, [serviceValues]
+                )
+            }
         }
 
-        // Update Gallery
+        // gallery update 
 
-        await db.promise().query(
-            "DELETE FROM gallery WHERE project_id = ?",
-            [id]
-        );
+        if (req.files?.gallery && req.files.gallery.length > 0) {
+            await db.promise().query("DELETE FROM gallery WHERE project_id = ?", [id]);
 
-        if (gallery?.length > 0) {
-            const galleryValues = gallery.map(
-                (image) => [
-                    id,
-                    image,
-                ]
-            );
+            const galleryValues = req.files.gallery.map(file => [id, file.path]);
 
             await db.promise().query(
-                `
-        INSERT INTO gallery
-        (project_id, image_url)
-        VALUES ?
-        `, [galleryValues]
-            );
+                `INSERT INTO gallery ( project_id ,image_url ) VALUES ? `, [galleryValues]
+            )
+
         }
 
         res.status(200).json({
             success: true,
-            message: "Project Updated Successfully",
-        });
+            message: "PRoject updated succefully"
+        })
 
     } catch (error) {
         res.status(500).json({

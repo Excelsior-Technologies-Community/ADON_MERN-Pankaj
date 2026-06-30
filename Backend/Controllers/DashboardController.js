@@ -9,8 +9,12 @@ export const getDashBoard = async (req, res) => {
 
         const [[services]] = await db.promise().query("SELECT COUNT(*) AS totalServices FROM services")
 
-        //   const [[messages]] =await db.promise().query("SELECT COUNT(*) AS totalMesaages FROM contact_messages");
-
+        const [recentMessages] = await db.promise().query(`
+    SELECT id, name, subject, is_read
+    FROM messages
+    ORDER BY createdAt DESC
+    LIMIT 5
+`);
         // Recent Projects
         const [recentProjects] = await db.promise().query(`
       SELECT
@@ -34,7 +38,7 @@ export const getDashBoard = async (req, res) => {
                 // totalMessages: messages.totalMessages,
             },
 
-            recentProjects,
+            recentProjects, recentMessages
         });
     } catch (error) {
         console.log(error);

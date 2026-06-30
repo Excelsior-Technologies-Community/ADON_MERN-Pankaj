@@ -9,6 +9,7 @@ import uploadRouter from "./Routes/uploadRoute.js"
 import uploadImg from "./Routes/UploadAllRoute.js"
 import DashRouter from "./Routes/DashboardRoute.js";
 import MessageRouter from "./Routes/MessageRoute.js";
+import AboutRouter from "./Routes/AboutRoute.js";
 const app = express();
 
 app.use(cors());
@@ -25,6 +26,7 @@ app.use("/api/upload", uploadImg)
 app.use("/api", uploadRouter)
 app.use("/api", DashRouter)
 app.use("/api/msg", MessageRouter)
+app.use("/api/about", AboutRouter);
 
 app.use((err, req, res, next) => {
     console.error(err);

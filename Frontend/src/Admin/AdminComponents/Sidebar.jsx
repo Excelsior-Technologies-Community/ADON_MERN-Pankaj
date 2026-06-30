@@ -6,6 +6,7 @@ import {
   FiSettings,
   FiLogOut,
   FiX,
+  FiInfo,
 } from "react-icons/fi";
 
 import { NavLink, useNavigate } from "react-router-dom";
@@ -37,10 +38,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       icon: <FiMail size={20} />,
       path: "/admin/messages",
     },
+
     {
-      title: "Settings",
-      icon: <FiSettings size={20} />,
-      path: "/admin/settings",
+      title: "About",
+      icon: <FiInfo />,
+      path: "/admin/about",
     },
   ];
 
@@ -105,7 +107,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <NavLink
                 key={item.path}
                 to={item.path}
-                end={item.path === "/admin"}
+                end={
+                  item.path === "/admin" ||
+                  item.path === "/admin/projects" ||
+                  item.path === "/admin/messages" ||
+                  item.path === "/admin/about"
+                }
                 onClick={() => setSidebarOpen(false)}
                 className={({ isActive }) =>
                   `

@@ -7,7 +7,7 @@ import {
   FiLogOut,
   FiUser,
 } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Topbar = ({ setSidebarOpen }) => {
   const [profileOpen, setProfileOpen] = useState(false);
@@ -56,6 +56,11 @@ const Topbar = ({ setSidebarOpen }) => {
 
         <div className="flex items-center gap-5">
           {/* Date */}
+          <Link to="/">
+            <button className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-3 rounded-xl">
+              Visit Website
+            </button>
+          </Link>
 
           <div className="hidden xl:block text-right">
             <p className="text-white font-medium">Welcome back 👋</p>

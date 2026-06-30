@@ -1,7 +1,41 @@
 import { FiFolder, FiUsers, FiMail, FiTrendingUp } from "react-icons/fi";
 import DashboardCard from "../AdminComponents/DashboardCard";
+import { useState } from "react";
+import axios from "axios";
+import { useEffect } from "react";
+import { FiTool } from "react-icons/fi";
 
 const Dashboard = () => {
+  const [dashboard, setDashboard] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getDashBoard();
+  }, []);
+
+  const getDashBoard = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await axios.get("http://localhost:5000/api/dashdata", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setDashboard(data);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || "Failed to load dashboard");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="text-white text-center py-20">Loading Dashboard...</div>
+    );
+  }
+
   return (
     <div>
       <div className="mb-10">
@@ -15,14 +49,14 @@ const Dashboard = () => {
       <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
         <DashboardCard
           title="Projects"
-          value="18"
+          value={dashboard.stats.totalProjects}
           change="+5 this month"
           icon={<FiFolder />}
         />
 
         <DashboardCard
           title="Users"
-          value="6"
+          value={dashboard.stats.totalUsers}
           change="+2 today"
           icon={<FiUsers />}
         />
@@ -35,10 +69,10 @@ const Dashboard = () => {
         />
 
         <DashboardCard
-          title="Visitors"
-          value="4,250"
+          title="Services"
+          value={dashboard.stats.totalServices}
           change="+15%"
-          icon={<FiTrendingUp />}
+          icon={<FiTool />}
         />
       </div>
 
@@ -59,23 +93,28 @@ const Dashboard = () => {
           </h2>
 
           <div className="space-y-5">
-            <div className="flex justify-between">
-              <span className="text-slate-300">Digital Agency</span>
+            {dashboard.recentProjects.map((project) => (
+              <div
+                key={project.id}
+                className="flex justify-between items-center"
+              >
+                <div className="flex items-center gap-3">
+                  <img
+                    src={project.heroImage}
+                    alt={project.title}
+                    className="w-12 h-12 rounded-lg object-cover"
+                  />
 
-              <span className="text-orange-500">Web</span>
-            </div>
+                  <div>
+                    <p className="text-white font-medium">{project.title}</p>
 
-            <div className="flex justify-between">
-              <span className="text-slate-300">Restaurant</span>
+                    <p className="text-slate-400 text-sm">{project.client}</p>
+                  </div>
+                </div>
 
-              <span className="text-orange-500">Branding</span>
-            </div>
-
-            <div className="flex justify-between">
-              <span className="text-slate-300">Real Estate</span>
-
-              <span className="text-orange-500">Marketing</span>
-            </div>
+                <span className="text-orange-500">{project.category}</span>
+              </div>
+            ))}
           </div>
         </div>
 

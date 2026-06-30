@@ -14,6 +14,7 @@ const EditProject = () => {
   const [heroImage, setHeroImage] = useState(null);
 
   const [gallery, setGallery] = useState([]);
+  const [deletedImg, setDeletedImg] = useState([]);
 
   const [formData, setFormData] = useState({
     slug: "",
@@ -42,7 +43,7 @@ const EditProject = () => {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/projects/${id}`,
+        `http://localhost:5000/api/projects/id/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -53,26 +54,30 @@ const EditProject = () => {
       const project = data.project;
 
       setFormData({
-        slug: project.slug,
-        title: project.title,
-        category: project.category,
-        client: project.client,
-        year: project.year,
-        duration: project.duration,
-        description: project.description,
-        challenge: project.challenge,
-        solution: project.solution,
-        services: project.services.join(", "),
-        traffic: project.traffic,
-        conversions: project.conversions,
-        engagement: project.engagement,
+        slug: project.slug || "",
+        title: project.title || "",
+        category: project.category || "",
+        client: project.client || "",
+        year: project.year || "",
+        duration: project.duration || "",
+        description: project.description || "",
+        challenge: project.challenge || "",
+        solution: project.solution || "",
+
+        services: data.services.map((item) => item.service_name).join(", "),
+
+        traffic: project.traffic || "",
+        conversions: project.conversions || "",
+        engagement: project.engagement || "",
       });
 
       setHeroImage(project.heroImage);
 
-      setGallery(project.gallery);
+      setGallery(data.gallery.map((item) => item.image_url));
     } catch (error) {
-      toast.error(error.response?.data?.message);
+      console.log(error);
+
+      toast.error(error.response?.data?.message || "Failed to load project");
     } finally {
       setLoading(false);
     }
@@ -126,6 +131,7 @@ const EditProject = () => {
           data.append("gallery", img);
         }
       });
+      data.append("deletedImg", JSON.stringify(deletedImg));
 
       const res = await axios.put(
         `http://localhost:5000/api/projects/${id}`,
@@ -147,6 +153,11 @@ const EditProject = () => {
     } finally {
       setLoading(false);
     }
+  };
+  const removeGalleryImage = (index) => {
+    const removedImg = gallery[index];
+    setDeletedImg((prev) => [...prev, removedImg]);
+    setGallery((prev) => prev.filter((_, i) => i !== index));
   };
 
   if (loading) {
@@ -221,7 +232,8 @@ const EditProject = () => {
 
                   <button
                     type="button"
-                    className="absolute top-2 right-2 w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center"
+                    onClick={() => removeGalleryImage(index)}
+                    className="absolute top-2 right-2 w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 transition"
                   >
                     <FiTrash2 />
                   </button>

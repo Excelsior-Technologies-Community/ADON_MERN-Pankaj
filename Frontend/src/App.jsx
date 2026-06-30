@@ -11,16 +11,21 @@ import Dashboard from "./Admin/Pages/Dashboard";
 import Projects from "./Admin/Pages/Projects";
 import AddProject from "./Admin/Pages/AddProject";
 import EditProject from "./Admin/Pages/EditProject";
+import Help from "./Pages/Help";
+import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <>
+      <Toaster position="top-right" />
       <Routes>
         <Route element={<UserLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/project/:slug" element={<ProjectDetail />} />
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/help" element={<Help />} />
         </Route>
+
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="projects" element={<Projects />} />

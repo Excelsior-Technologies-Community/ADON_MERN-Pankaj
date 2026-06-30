@@ -252,7 +252,9 @@ export const updateProject = async (req, res) => {
         }
 
         const oldProject = projectData[0];
-
+        const deletedImages = JSON.parse(
+            req.body.deletedImg || "[]"
+        );
         const {
             slug,
             title,
@@ -322,6 +324,13 @@ export const updateProject = async (req, res) => {
             }
         }
 
+
+        for (const imageUrl of deletedImages) {
+            await db.promise().query(
+                "DELETE FROM gallery WHERE image_url = ?",
+                [imageUrl]
+            );
+        }
         // gallery update 
 
         if (req.files?.gallery && req.files.gallery.length > 0) {
@@ -446,3 +455,40 @@ export const importProjects = async (req, res) => {
 
     }
 };
+
+export const getProjectId = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const [projects] = await db.promise().query("SELECT * FROM projects WHERE id = ? ", [id]);
+
+        if (projects.length === 0) {
+            return res.status(404).json({
+                success: true,
+                message: "Project not found"
+            });
+        }
+        //services
+
+        const [services] = await db.promise().query("SELECT service_name FROM services WHERE project_id = ?", [id]);
+
+        // Gallery 
+
+        const [gallery] = await db.promise().query("SELECT image_url FROM gallery WHERE project_id = ?", [id]);
+        ;
+
+        res.status(200).json({
+            success: true,
+            project: projects[0],
+            services,
+            gallery
+        })
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+}

@@ -186,7 +186,7 @@ const Projects = () => {
                     <button className="w-10 h-10 rounded-lg bg-slate-800 hover:bg-blue-600 flex items-center justify-center text-white transition">
                       <FiEye />
                     </button>
-                    <Link to={`/projects/edit/${project.id}`}>
+                    <Link to={`/admin/projects/edit/${project.id}`}>
                       <button className="w-10 h-10 rounded-lg bg-slate-800 hover:bg-orange-500 flex items-center justify-center text-white transition">
                         <FiEdit />
                       </button>
@@ -243,7 +243,7 @@ const Projects = () => {
                 <FiEye className="mx-auto" />
               </button>
 
-              <Link to={`/projects/edit/${project.id}`}>
+              <Link to={`/admin/projects/edit/${project.id}`}>
                 {" "}
                 <button className="flex-1 mx-2 py-3 rounded-xl bg-slate-800 hover:bg-orange-500 text-white transition">
                   <FiEdit className="mx-auto" />

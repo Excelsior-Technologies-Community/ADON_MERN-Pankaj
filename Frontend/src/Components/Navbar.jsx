@@ -60,7 +60,7 @@ const Navbar = () => {
             </li>
 
             <li className="cursor-pointer text-white hover:text-[#ff6b3d] transition-colors duration-300">
-              Help
+              <Link to="/help"> Help</Link>
             </li>
           </ul>
 
@@ -261,7 +261,7 @@ const Navbar = () => {
           </li>
 
           <li className="py-4 border-b hover:text-[#ff6b3d] transition-colors cursor-pointer">
-            Help
+            <Link to="/help"> Help</Link>
           </li>
         </ul>
 

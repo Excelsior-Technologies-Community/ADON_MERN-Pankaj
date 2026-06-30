@@ -7,6 +7,8 @@ import ProjectRouter from "./Routes/ProjectRoute.js";
 import UserRouter from "./Routes/AuthRoute.js";
 import uploadRouter from "./Routes/uploadRoute.js"
 import uploadImg from "./Routes/UploadAllRoute.js"
+import DashRouter from "./Routes/DashboardRoute.js";
+import MessageRouter from "./Routes/MessageRoute.js";
 const app = express();
 
 app.use(cors());
@@ -21,6 +23,9 @@ app.use("/api/user", UserRouter)
 app.use("/api/upload", uploadImg)
 
 app.use("/api", uploadRouter)
+app.use("/api", DashRouter)
+app.use("/api/msg", MessageRouter)
+
 app.use((err, req, res, next) => {
     console.error(err);
     res.status(err.status || 500).json({

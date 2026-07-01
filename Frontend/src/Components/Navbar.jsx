@@ -8,7 +8,12 @@ const Navbar = () => {
   const [mobilePages, setMobilePages] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
-
+  const pages = [
+    { name: "About Us", path: "/about" },
+    { name: "Blog", path: "/blog" },
+    { name: "Team", path: "/team" },
+    { name: "FAQ", path: "/faq" },
+  ];
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.clear();
@@ -47,12 +52,14 @@ const Navbar = () => {
 
               <div className="absolute top-full left-0 pt-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <ul className="bg-black text-white rounded-lg shadow-xl w-56 py-2">
-                  {["About Us", "Blog", "Team", "FAQ"].map((item) => (
+                  {pages.map((item) => (
                     <li
-                      key={item}
+                      key={item.path}
                       className="px-5 py-3 hover:text-[#ff6b3d] hover:pl-7 transition-all duration-300 cursor-pointer"
                     >
-                      {item}
+                      <Link to={item.path} className="block w-full h-full">
+                        {item.name}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -248,12 +255,14 @@ const Navbar = () => {
               }`}
             >
               <ul className="pl-5 pb-3">
-                {["About Us", "Blog", "Team", "FAQ"].map((item) => (
-                  <li
-                    key={item}
-                    className="py-2 hover:text-[#ff6b3d] transition-colors cursor-pointer"
-                  >
-                    {item}
+                {pages.map((item) => (
+                  <li key={item.path} className="py-2">
+                    <Link
+                      to={item.path}
+                      className="hover:text-[#ff6b3d] transition-colors"
+                    >
+                      {item.name}
+                    </Link>
                   </li>
                 ))}
               </ul>

@@ -16,6 +16,7 @@ import { Toaster } from "react-hot-toast";
 import Messages from "./Admin/Pages/Messages";
 import ViewMessages from "./Admin/Pages/ViewMessages";
 import About from "./Admin/Pages/About";
+import AboutUs from "./Pages/AboutUs";
 function App() {
   return (
     <>
@@ -27,6 +28,7 @@ function App() {
           <Route path="/project/:slug" element={<ProjectDetail />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/help" element={<Help />} />
+          <Route path="/about" element={<AboutUs />} />
         </Route>
 
         <Route path="/admin" element={<AdminLayout />}>

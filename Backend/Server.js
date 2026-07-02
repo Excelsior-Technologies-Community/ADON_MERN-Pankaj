@@ -11,6 +11,7 @@ import DashRouter from "./Routes/DashboardRoute.js";
 import MessageRouter from "./Routes/MessageRoute.js";
 import AboutRouter from "./Routes/AboutRoute.js";
 import BlogRouter from "./Routes/BlogRoute.js";
+import TeamRouter from "./Routes/TeamRoute.js";
 const app = express();
 
 app.use(cors());
@@ -29,6 +30,7 @@ app.use("/api", DashRouter)
 app.use("/api/msg", MessageRouter)
 app.use("/api/about", AboutRouter);
 app.use("/api/blog", BlogRouter)
+app.use("/api/team", TeamRouter)
 
 app.use((err, req, res, next) => {
     console.error(err);

@@ -1,3 +1,4 @@
+import cloudinary from "../Config/cloudinary.js";
 import db from "../Config/db.js";
 
 export const createBlog = async (req, res) => {
@@ -79,7 +80,6 @@ export const getBlogById = async (req, res) => {
 }
 
 
-import cloudinary from "../Config/cloudinary.js";
 
 export const deleteBlog = async (req, res) => {
     try {

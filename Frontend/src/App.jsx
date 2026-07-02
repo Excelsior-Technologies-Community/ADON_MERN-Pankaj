@@ -17,6 +17,10 @@ import Messages from "./Admin/Pages/Messages";
 import ViewMessages from "./Admin/Pages/ViewMessages";
 import About from "./Admin/Pages/About";
 import AboutUs from "./Pages/AboutUs";
+import Blogs from "./Admin/Pages/Blogs";
+import AddBlog from "./Admin/Pages/AddBlog";
+import EditBlog from "./Admin/Pages/EditBlog";
+import UserBlog from "./Pages/UserBlog";
 function App() {
   return (
     <>
@@ -29,6 +33,7 @@ function App() {
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/help" element={<Help />} />
           <Route path="/about" element={<AboutUs />} />
+          <Route path="/blog" element={<UserBlog />} />
         </Route>
 
         <Route path="/admin" element={<AdminLayout />}>
@@ -39,6 +44,9 @@ function App() {
           <Route path="messages" element={<Messages />} />
           <Route path="messages/view/:id" element={<ViewMessages />} />
           <Route path="about" element={<About />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="blogs/add" element={<AddBlog />} />
+          <Route path="blogs/edit/:id" element={<EditBlog />} />
         </Route>
       </Routes>
     </>

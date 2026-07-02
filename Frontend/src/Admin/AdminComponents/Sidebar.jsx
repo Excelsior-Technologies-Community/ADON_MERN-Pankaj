@@ -7,6 +7,7 @@ import {
   FiLogOut,
   FiX,
   FiInfo,
+  FiBookOpen,
 } from "react-icons/fi";
 
 import { NavLink, useNavigate } from "react-router-dom";
@@ -43,6 +44,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       title: "About",
       icon: <FiInfo />,
       path: "/admin/about",
+    },
+    {
+      title: "Blogs",
+      path: "/admin/blogs",
+      icon: <FiBookOpen />,
+      end: true,
     },
   ];
 
